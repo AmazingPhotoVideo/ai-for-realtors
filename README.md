@@ -1,6 +1,6 @@
 <div align="center">
 
-# Realtor AI Playbook
+# AI for Realtors
 
 ### AI prompts, Claude Skills, and proven tutorials for real estate agents who want more listings, more buyers, and more closed deals.
 
@@ -19,7 +19,7 @@
 
 ## What is this?
 
-The **Realtor AI Playbook** is a free, open-source collection of:
+**AI for Realtors** is a free, open-source collection of:
 
 - 🧠 **AI prompts** — battle-tested prompts for ChatGPT, Claude, Gemini, and Perplexity, written specifically for real estate workflows
 - 🛠️ **Claude Skills** — reusable skill modules that turn Claude into a specialist agent for listing presentations, lead nurture, market reports, and more
@@ -49,8 +49,8 @@ Built by working agents and the team behind APV — not theory, not vibes. Every
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/amazing-photo-video/realtor-ai-playbook.git
-cd realtor-ai-playbook
+git clone https://github.com/AmazingPhotoVideo/ai-for-realtors.git
+cd ai-for-realtors
 
 # 2. Browse the section you need (start with listing leads if you're stuck)
 cd prompts/listing-leads

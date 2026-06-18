@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Listing Appointment Checklist</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, sans-serif; max-width: 840px; margin: 40px auto; padding: 0 20px; line-height: 1.5; }
+    h1 { line-height: 1.1; }
+    section { border: 1px solid #ddd; border-radius: 12px; padding: 18px; margin: 16px 0; }
+    label { display: block; margin: 10px 0; }
+    .muted { color: #666; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h1>Listing Appointment Checklist</h1>
+  <p class="muted">A simple pre-meeting checklist for real estate agents. Resource by Amazing Photo Video: <a href="https://amazingphotovideo.com">amazingphotovideo.com</a></p>
+
+  <section>
+    <h2>Before the appointment</h2>
+    <label><input type="checkbox"> Confirm seller motivation, timeline, and decision-makers.</label>
+    <label><input type="checkbox"> Pull comparable sales and active competition.</label>
+    <label><input type="checkbox"> Review listing photos/videos from competing homes.</label>
+    <label><input type="checkbox"> Prepare pricing range and risk notes.</label>
+    <label><input type="checkbox"> Prepare marketing plan and launch calendar.</label>
+  </section>
+
+  <section>
+    <h2>During the appointment</h2>
+    <label><input type="checkbox"> Ask what outcome matters most besides price.</label>
+    <label><input type="checkbox"> Walk through condition, upgrades, and objections.</label>
+    <label><input type="checkbox"> Explain pricing strategy and market exposure plan.</label>
+    <label><input type="checkbox"> Confirm next step and follow-up deadline.</label>
+  </section>
+
+  <section>
+    <h2>AI debrief prompt</h2>
+    <p>Paste this after the meeting:</p>
+    <pre>Summarize this listing appointment. Identify seller motivation, objections, likely decision criteria, missing information, and the next-best follow-up. Draft a concise follow-up email and SMS.</pre>
+  </section>
+</body>
+</html>

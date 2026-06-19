@@ -44,6 +44,7 @@ Built by working agents and the team behind APV — not theory, not vibes. Every
 - [🌎 Multilingual prompt library](#-multilingual-prompt-library)
 - [🏢 Brokerage-tier playbook](#-brokerage-tier-playbook)
 - [How to use Claude Skills](#how-to-use-claude-skills)
+- [Realtor AI agent adoption kit](#-realtor-ai-agent-adoption-kit)
 - [Completion checklist](#completion-checklist)
 - [Contributing](#contributing)
 - [About APV](#about-apv)
@@ -209,6 +210,18 @@ Broker-owners, team leads, and ops managers can use this to roll out AI as an op
 | Asset | What it does | Path |
 |---|---|---|
 | **Brokerage AI Playbook** | 30-day rollout, recruiting outreach, retention check-ins, team cadence, AI policy template, listing-launch SLA, brokerage dashboard, and operations audit prompt | [`/playbooks/brokerage-tier/`](./playbooks/brokerage-tier) |
+
+---
+
+## 🤖 Realtor AI agent adoption kit
+
+Use this when a realtor wants their own Hermes, OpenClaw, Raspberry Pi, Open WebUI, Claude, or ChatGPT-style agent to adopt the AI for Realtors operating system instead of copying prompts one by one.
+
+| Asset | What it does | Path |
+|---|---|---|
+| **Agent Adoption Kit** | System prompt, OpenClaw heartbeat instructions, Hermes scheduled-task recipes, onboarding questions, connector map, memory/learning policy, and daily/weekly runbooks for a proactive realtor operator agent | [`/agent-framework/`](./agent-framework) |
+
+The kit is designed for safe autonomy: read and prepare first, draft responses for approval, learn the user's farm/tone/preferences, check CRM/tasks/calendar/inbox/social metrics when connected, and surface only useful work.
 
 ---
 

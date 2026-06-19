@@ -1,0 +1,52 @@
+# Example Hermes profile fragment for a realtor AI operator.
+# Merge into ~/.hermes/profiles/<profile>/config.yaml or configure through the Hermes CLI.
+# Store API keys in .env / OS keychain / OAuth flows, not in this file.
+
+model:
+  provider: openai-codex
+  default: gpt-5.5
+
+toolsets:
+  - web
+  - search
+  - terminal
+  - file
+  - cronjob
+  - skills
+  - session_search
+  - memory
+
+agent:
+  max_turns: 120
+  reasoning_effort: medium
+
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+
+skills:
+  external_dirs:
+    # Optional: point Hermes at a local clone of ai-for-realtors/skills.
+    - /path/to/ai-for-realtors/skills
+
+# Native MCP examples. Install only the servers the realtor approves.
+# Do not enable broad filesystem or browser automation without explaining scope.
+mcp_servers:
+  # Google Workspace MCP server, if the user uses a vetted one.
+  # google_workspace:
+  #   command: "npx"
+  #   args: ["-y", "<approved-google-workspace-mcp-server>"]
+  #   env:
+  #     GOOGLE_APPLICATION_CREDENTIALS: "/secure/path/service-account.json"
+
+  # CRM MCP server, Zapier MCP, Pipedream MCP, or custom local API wrapper.
+  # crm:
+  #   url: "https://your-approved-crm-mcp.example.com/mcp"
+  #   headers:
+  #     Authorization: "Bearer ${CRM_MCP_TOKEN}"
+
+cron:
+  wrap_response: true
+
+security:
+  redact_secrets: true

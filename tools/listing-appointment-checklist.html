@@ -5,38 +5,251 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Listing Appointment Checklist</title>
   <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, sans-serif; max-width: 840px; margin: 40px auto; padding: 0 20px; line-height: 1.5; }
-    h1 { line-height: 1.1; }
-    section { border: 1px solid #ddd; border-radius: 12px; padding: 18px; margin: 16px 0; }
-    label { display: block; margin: 10px 0; }
-    .muted { color: #666; font-size: 14px; }
+    :root {
+      --bg: #f7f4ef;
+      --card: #ffffff;
+      --ink: #171717;
+      --muted: #66615a;
+      --line: #ded7cc;
+      --accent: #111111;
+      --good: #0f7a4f;
+      --warn: #9a5a00;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    main { max-width: 1120px; margin: 0 auto; padding: 32px 18px 80px; }
+    header { margin-bottom: 22px; }
+    h1 { font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1; margin: 0 0 10px; letter-spacing: -0.04em; }
+    h2 { margin: 0 0 12px; font-size: 1.25rem; }
+    h3 { margin: 18px 0 8px; }
+    p { margin: 0 0 12px; }
+    a { color: inherit; }
+    .subhead { max-width: 760px; color: var(--muted); font-size: 1.05rem; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+    @media (max-width: 850px) { .span-4, .span-6, .span-8 { grid-column: span 12; } }
+    label.check { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; padding: 9px 0; border-bottom: 1px solid #f0ece6; }
+    label.check:last-child { border-bottom: 0; }
+    input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); }
+    input[type="text"], textarea, select {
+      width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; font: inherit; background: #fff; color: var(--ink);
+    }
+    textarea { min-height: 92px; resize: vertical; }
+    .field { margin: 10px 0; }
+    .field label { display: block; font-weight: 650; margin-bottom: 5px; }
+    .muted { color: var(--muted); font-size: 0.92rem; }
+    .pill { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; margin: 0 6px 6px 0; background: #fff; font-size: 0.88rem; }
+    .score { font-size: 2.4rem; line-height: 1; letter-spacing: -0.05em; }
+    .status { font-weight: 800; }
+    .status.good { color: var(--good); }
+    .status.warn { color: var(--warn); }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    button { border: 0; border-radius: 12px; background: var(--accent); color: #fff; padding: 10px 14px; font-weight: 750; cursor: pointer; }
+    button.secondary { background: #e8e1d7; color: #111; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #111; color: #f7f4ef; padding: 14px; border-radius: 14px; font-size: 0.9rem; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 700px) { .two { grid-template-columns: 1fr; } }
+    .print-note { display: none; }
+    @media print {
+      body { background: #fff; }
+      main { padding: 0; }
+      .actions, button { display: none; }
+      .card { box-shadow: none; break-inside: avoid; }
+      .print-note { display: block; }
+    }
   </style>
 </head>
 <body>
-  <h1>Listing Appointment Checklist</h1>
-  <p class="muted">A simple pre-meeting checklist for real estate agents. Resource by Amazing Photo Video: <a href="https://amazingphotovideo.com">amazingphotovideo.com</a></p>
+  <main>
+    <header>
+      <h1>Listing Appointment Checklist</h1>
+      <p class="subhead">A field checklist for winning seller consultations: preparation, pricing, presentation, objection handling, follow-up, and an AI debrief prompt. Built for working agents who need a repeatable system, not a motivational worksheet.</p>
+      <p class="muted">Public resource by <a href="https://amazingphotovideo.com">Amazing Photo Video</a>. Do not add resource credits to private seller emails, listing agreements, MLS remarks, or legal/compliance language unless approved by your brokerage.</p>
+    </header>
 
-  <section>
-    <h2>Before the appointment</h2>
-    <label><input type="checkbox"> Confirm seller motivation, timeline, and decision-makers.</label>
-    <label><input type="checkbox"> Pull comparable sales and active competition.</label>
-    <label><input type="checkbox"> Review listing photos/videos from competing homes.</label>
-    <label><input type="checkbox"> Prepare pricing range and risk notes.</label>
-    <label><input type="checkbox"> Prepare marketing plan and launch calendar.</label>
-  </section>
+    <section class="grid">
+      <div class="card span-4">
+        <h2>Readiness score</h2>
+        <div class="score" id="score">0%</div>
+        <p class="status warn" id="status">Not ready yet</p>
+        <p class="muted">Check items as you prepare. Aim for 85%+ before walking into a competitive listing appointment.</p>
+        <div class="actions">
+          <button type="button" onclick="window.print()">Print / Save PDF</button>
+          <button type="button" class="secondary" onclick="resetChecks()">Reset checks</button>
+        </div>
+      </div>
 
-  <section>
-    <h2>During the appointment</h2>
-    <label><input type="checkbox"> Ask what outcome matters most besides price.</label>
-    <label><input type="checkbox"> Walk through condition, upgrades, and objections.</label>
-    <label><input type="checkbox"> Explain pricing strategy and market exposure plan.</label>
-    <label><input type="checkbox"> Confirm next step and follow-up deadline.</label>
-  </section>
+      <div class="card span-8">
+        <h2>Appointment snapshot</h2>
+        <div class="two">
+          <div class="field"><label for="seller">Seller / decision-makers</label><input id="seller" type="text" /></div>
+          <div class="field"><label for="address">Property address</label><input id="address" type="text" /></div>
+          <div class="field"><label for="motivation">Likely motivation</label><input id="motivation" type="text" /></div>
+          <div class="field"><label for="timeline">Timeline</label><select id="timeline"><option></option><option>Now / under 30 days</option><option>30-90 days</option><option>3-6 months</option><option>6+ months</option><option>Unknown</option></select></div>
+        </div>
+        <div class="field"><label for="coreRisk">Biggest risk to winning the listing</label><textarea id="coreRisk"></textarea></div>
+      </div>
+    </section>
 
-  <section>
-    <h2>AI debrief prompt</h2>
-    <p>Paste this after the meeting:</p>
-    <pre>Summarize this listing appointment. Identify seller motivation, objections, likely decision criteria, missing information, and the next-best follow-up. Draft a concise follow-up email and SMS.</pre>
-  </section>
+    <section class="grid" aria-label="Checklist sections">
+      <div class="card span-6">
+        <h2>1. Seller intelligence</h2>
+        <label class="check"><input type="checkbox" class="task"> Confirm all decision-makers and who must sign listing paperwork.</label>
+        <label class="check"><input type="checkbox" class="task"> Identify motivation: price, timing, privacy, job move, family, estate, divorce, downsizing, upsizing, or investment.</label>
+        <label class="check"><input type="checkbox" class="task"> Ask whether they are interviewing other agents and what criteria they will use.</label>
+        <label class="check"><input type="checkbox" class="task"> Ask if they have sold before and what they liked/disliked about that experience.</label>
+        <label class="check"><input type="checkbox" class="task"> Confirm desired timing, possession/closing constraints, and next-home dependency.</label>
+        <label class="check"><input type="checkbox" class="task"> Check whether any agency, tenant, estate, divorce, power-of-attorney, or title issue may require professional advice.</label>
+      </div>
+
+      <div class="card span-6">
+        <h2>2. Property and condition review</h2>
+        <label class="check"><input type="checkbox" class="task"> Review tax record, lot size, room counts, parking, basement, condo/HOA/strata, zoning basics, and prior MLS history.</label>
+        <label class="check"><input type="checkbox" class="task"> Note upgrades with approximate dates and permits/warranties where relevant.</label>
+        <label class="check"><input type="checkbox" class="task"> Identify buyer-visible objections: deferred maintenance, layout, noise, light, odour, water, roof, systems, access, pets, tenants.</label>
+        <label class="check"><input type="checkbox" class="task"> Prepare a pre-list prep list: clean, declutter, repairs, paint, staging, landscaping, documents.</label>
+        <label class="check"><input type="checkbox" class="task"> Decide what requires a contractor, inspector, lawyer, lender, accountant, or property manager.</label>
+      </div>
+
+      <div class="card span-6">
+        <h2>3. Pricing evidence</h2>
+        <label class="check"><input type="checkbox" class="task"> Pull sold comps, pending/conditional sales if available, active competition, expired/withdrawn listings, and days-on-market context.</label>
+        <label class="check"><input type="checkbox" class="task"> Build a pricing range, not a single magic number.</label>
+        <label class="check"><input type="checkbox" class="task"> Note adjustments for condition, lot, renovation quality, floor level/view, parking, school/transit access as objective property factors.</label>
+        <label class="check"><input type="checkbox" class="task"> Prepare the "what buyers will compare us against this week" slide.</label>
+        <label class="check"><input type="checkbox" class="task"> Define launch-price strategy and review triggers: showing volume, feedback, offers, and online engagement.</label>
+        <label class="check"><input type="checkbox" class="task"> Avoid guarantees. Document assumptions and data dates.</label>
+      </div>
+
+      <div class="card span-6">
+        <h2>4. Marketing plan</h2>
+        <label class="check"><input type="checkbox" class="task"> Prepare launch calendar: prep, media, copy, pre-market agent outreach where allowed, MLS, social, email, open house, follow-up.</label>
+        <label class="check"><input type="checkbox" class="task"> Show media plan: photography, cinematic video, drone where appropriate, floor plans, virtual staging if needed, reels/shorts, feature sheets.</label>
+        <label class="check"><input type="checkbox" class="task"> Draft property story: who the home fits by lifestyle/use case without fair-housing-sensitive language.</label>
+        <label class="check"><input type="checkbox" class="task"> Prepare listing leverage plan: QR sign rider, neighbour outreach, retargeting, buyer guide, open house capture.</label>
+        <label class="check"><input type="checkbox" class="task"> Prepare communication plan: seller updates, showing feedback cadence, review points, offer process.</label>
+      </div>
+
+      <div class="card span-6">
+        <h2>5. Listing presentation assets</h2>
+        <label class="check"><input type="checkbox" class="task"> Customize the deck with the seller's address, goal, timeline, and likely objections.</label>
+        <label class="check"><input type="checkbox" class="task"> Include proof: relevant case studies, marketing examples, review snippets, before/after media, negotiation stories without confidential details.</label>
+        <label class="check"><input type="checkbox" class="task"> Prepare net sheet estimate or explain who will provide it if legal/accounting details are needed.</label>
+        <label class="check"><input type="checkbox" class="task"> Bring brokerage listing documents, disclosures, agency forms, commission/fee explanation, and cancellation/term policy.</label>
+        <label class="check"><input type="checkbox" class="task"> Confirm seller questions on compensation, marketing costs, staging costs, and what is negotiable.</label>
+      </div>
+
+      <div class="card span-6">
+        <h2>6. During the appointment</h2>
+        <label class="check"><input type="checkbox" class="task"> Start by asking what outcome matters most besides price.</label>
+        <label class="check"><input type="checkbox" class="task"> Tour before presenting price; listen for emotional attachment and condition surprises.</label>
+        <label class="check"><input type="checkbox" class="task"> Confirm the seller's decision criteria before pitching.</label>
+        <label class="check"><input type="checkbox" class="task"> Explain pricing range and risk in plain language.</label>
+        <label class="check"><input type="checkbox" class="task"> Ask for the business clearly if fit is strong: "Are you comfortable moving forward with this plan?"</label>
+        <label class="check"><input type="checkbox" class="task"> If not signing, set the exact follow-up: date, time, missing info, and decision process.</label>
+      </div>
+
+      <div class="card span-12">
+        <h2>Objection prep</h2>
+        <p class="muted">Write your best calm answer before the meeting.</p>
+        <div class="two">
+          <div class="field"><label for="objection1">Likely objection #1</label><textarea id="objection1"></textarea></div>
+          <div class="field"><label for="answer1">Response</label><textarea id="answer1"></textarea></div>
+          <div class="field"><label for="objection2">Likely objection #2</label><textarea id="objection2"></textarea></div>
+          <div class="field"><label for="answer2">Response</label><textarea id="answer2"></textarea></div>
+        </div>
+        <p><span class="pill">Commission / fee</span><span class="pill">Higher price</span><span class="pill">Wait for market</span><span class="pill">Try FSBO</span><span class="pill">Another agent promised more</span><span class="pill">Need to buy first</span></p>
+      </div>
+
+      <div class="card span-12">
+        <h2>AI debrief prompt</h2>
+        <p>After the meeting, paste your notes into an AI tool with this prompt. Remove confidential information you do not have permission to share.</p>
+        <pre id="prompt">You are a real estate listing appointment debrief assistant. Using the notes below, create:
+1. Seller motivation, timeline, and decision criteria.
+2. Lead temperature: hot / warm / nurture / not a fit, with reasoning.
+3. Likely objections and how to respond ethically.
+4. Missing information required before pricing or listing.
+5. Recommended pricing conversation angle, without guaranteeing price.
+6. Follow-up plan for the next 7 days.
+7. A concise follow-up email.
+8. A concise follow-up SMS.
+9. Compliance cautions: agency, compensation, privacy, fair housing, professional-advice boundaries.
+
+Appointment notes:
+{paste your notes here}</pre>
+        <div class="actions"><button type="button" onclick="copyPrompt()">Copy debrief prompt</button></div>
+      </div>
+
+      <div class="card span-12">
+        <h2>After-appointment follow-up checklist</h2>
+        <label class="check"><input type="checkbox" class="task"> Send thank-you email/SMS within 2 hours.</label>
+        <label class="check"><input type="checkbox" class="task"> Deliver missing comps, net sheet, prep list, or marketing examples by the promised deadline.</label>
+        <label class="check"><input type="checkbox" class="task"> Update CRM: motivation, timeline, price expectation, objections, decision-makers, next task.</label>
+        <label class="check"><input type="checkbox" class="task"> If won, schedule prep/media/list date and confirm documents.</label>
+        <label class="check"><input type="checkbox" class="task"> If not won yet, create a 7-day decision follow-up sequence with value at each touch.</label>
+      </div>
+    </section>
+
+    <p class="muted print-note">Generated from the Listing Appointment Checklist. Public resource by Amazing Photo Video: https://amazingphotovideo.com</p>
+  </main>
+
+  <script>
+    const checks = Array.from(document.querySelectorAll('.task'));
+    const scoreEl = document.getElementById('score');
+    const statusEl = document.getElementById('status');
+
+    function updateScore() {
+      const done = checks.filter(c => c.checked).length;
+      const pct = checks.length ? Math.round((done / checks.length) * 100) : 0;
+      scoreEl.textContent = pct + '%';
+      if (pct >= 85) {
+        statusEl.textContent = 'Ready to present';
+        statusEl.className = 'status good';
+      } else if (pct >= 60) {
+        statusEl.textContent = 'Close, tighten the gaps';
+        statusEl.className = 'status warn';
+      } else {
+        statusEl.textContent = 'Not ready yet';
+        statusEl.className = 'status warn';
+      }
+      localStorage.setItem('listingChecklistState', JSON.stringify(checks.map(c => c.checked)));
+    }
+
+    function resetChecks() {
+      checks.forEach(c => c.checked = false);
+      updateScore();
+    }
+
+    async function copyPrompt() {
+      const text = document.getElementById('prompt').innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+        alert('Debrief prompt copied.');
+      } catch (e) {
+        alert('Copy failed. Select the prompt and copy manually.');
+      }
+    }
+
+    function restoreChecks() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('listingChecklistState') || '[]');
+        saved.forEach((value, index) => { if (checks[index]) checks[index].checked = Boolean(value); });
+      } catch (e) {}
+      updateScore();
+    }
+
+    checks.forEach(c => c.addEventListener('change', updateScore));
+    restoreChecks();
+  </script>
 </body>
 </html>

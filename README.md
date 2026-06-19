@@ -39,7 +39,12 @@ Built by working agents and the team behind APV — not theory, not vibes. Every
 - [🏡 Get more buyer leads](#-get-more-buyer-leads)
 - [💬 Converting leads](#-converting-leads-into-appointments-and-clients)
 - [🚀 Leveraging your listings](#-leveraging-your-listings)
+- [🔌 CRM integrations](#-crm-integrations)
+- [🖼️ Listing photo AI enhancement](#️-listing-photo-ai-enhancement)
+- [🌎 Multilingual prompt library](#-multilingual-prompt-library)
+- [🏢 Brokerage-tier playbook](#-brokerage-tier-playbook)
 - [How to use Claude Skills](#how-to-use-claude-skills)
+- [Completion checklist](#completion-checklist)
 - [Contributing](#contributing)
 - [About APV](#about-apv)
 
@@ -146,7 +151,7 @@ Every listing is a free billboard, lead magnet, and content engine. Most agents 
 | Asset | What it does | Path |
 |---|---|---|
 | **Single-Property Funnel** | One-listing landing page + capture + nurture (GoHighLevel + Vercel templates included) | [`/funnels/single-property/`](./funnels/single-property) |
-| **Coming Soon Funnel** | Build a waitlist *before* the listing hits MLS — generates buyer + seller leads | [`/funnels/coming-soon/`](./funnels/coming-soon) |
+| **Pre-Market Waitlist Funnel** | Build a waitlist *before* the listing hits MLS — generates buyer + seller leads | [`/funnels/pre-market-waitlist/`](./funnels/pre-market-waitlist) |
 | **Home Valuation Funnel** | Seller magnet funnel with automated CMA follow-up | [`/funnels/home-valuation/`](./funnels/home-valuation) |
 
 ### Retargeting ads
@@ -164,6 +169,46 @@ Every listing is a free billboard, lead magnet, and content engine. Most agents 
 | **One Listing → 30 Pieces of Content** | A single prompt that outputs 30 social posts, 5 emails, 3 reels scripts, and 1 blog from one listing | [`/prompts/leverage/content-multiplier/`](./prompts/leverage/content-multiplier) |
 | **AI Video Generation Prompts** | Veo 3, Sora, and WAN prompts tuned for real estate b-roll | [`/prompts/leverage/ai-video/`](./prompts/leverage/ai-video) |
 | **Property Story Generator** | Writes the "story" of a home — the part that makes buyers fall in love | [`/prompts/leverage/property-story/`](./prompts/leverage/property-story) |
+
+---
+
+## 🔌 CRM integrations
+
+Turn the prompts, QR funnels, landing pages, and nurture sequences in this repo into auditable CRM workflows.
+
+| Asset | What it does | Path |
+|---|---|---|
+| **CRM Integration Recipes** | Step-by-step implementation for GoHighLevel, Follow Up Boss, and kvCORE/BoldTrail, including custom fields, tags, action plans, smart campaigns, consent handling, multilingual routing, QA tests, and compliance notes | [`/integrations/crm/`](./integrations/crm) |
+
+---
+
+## 🖼️ Listing photo AI enhancement
+
+Use AI image tools without misleading buyers or creating MLS, advertising, or seller-disclosure risk.
+
+| Asset | What it does | Path |
+|---|---|---|
+| **Listing Photo Enhancement Skill** | Claude Skill/system prompt for truthful photo enhancement, virtual staging prompts, decluttering guardrails, disclosure language, QA checklists, and prohibited edit rules | [`/skills/listing-photo-enhancer/`](./skills/listing-photo-enhancer) |
+
+---
+
+## 🌎 Multilingual prompt library
+
+Adapt real estate marketing into French Canadian, Spanish, and Chinese while keeping facts, disclosures, tone, and fair housing guardrails intact.
+
+| Asset | What it does | Path |
+|---|---|---|
+| **FR-CA / ES / ZH Prompt Library** | Listing descriptions, seller valuation follow-up, buyer nurture, SMS examples, Chinese buyer consultation script, back-translation workflow, and multilingual QA checklist | [`/prompts/multilingual/`](./prompts/multilingual) |
+
+---
+
+## 🏢 Brokerage-tier playbook
+
+Broker-owners, team leads, and ops managers can use this to roll out AI as an operating system instead of a pile of random tools.
+
+| Asset | What it does | Path |
+|---|---|---|
+| **Brokerage AI Playbook** | 30-day rollout, recruiting outreach, retention check-ins, team cadence, AI policy template, listing-launch SLA, brokerage dashboard, and operations audit prompt | [`/playbooks/brokerage-tier/`](./playbooks/brokerage-tier) |
 
 ---
 
@@ -187,16 +232,16 @@ Full guide: [`/tutorials/using-claude-skills.md`](./tutorials/using-claude-skill
 
 ---
 
-## Roadmap
+## Completion checklist
 
 - [x] Listing lead prompts (v1)
 - [x] Buyer lead funnels (v1)
 - [x] Conversion sequences (v1)
 - [x] Listing leverage assets (v1)
-- [ ] CRM integration recipes (GoHighLevel, Follow Up Boss, kvCORE) — *Q3 2026*
-- [ ] AI image editing skills for listing photo enhancement — *Q3 2026*
-- [ ] Multilingual prompt library (FR-CA, ES, ZH) — *Q4 2026*
-- [ ] Brokerage-tier playbook (recruiting, retention, team systems) — *Q4 2026*
+- [x] CRM integration recipes (GoHighLevel, Follow Up Boss, kvCORE/BoldTrail)
+- [x] AI image editing skill for listing photo enhancement
+- [x] Multilingual prompt library (FR-CA, ES, ZH)
+- [x] Brokerage-tier playbook (recruiting, retention, team systems)
 
 ---
 

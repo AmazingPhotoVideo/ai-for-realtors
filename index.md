@@ -12,10 +12,13 @@ Maintained by [Amazing Photo Video](https://amazingphotovideo.com), a Toronto lu
 ## Start here
 
 - [Prompts](./prompts/) — listing leads, buyer leads, conversion, and listing leverage prompts.
-- [Claude Skills](./skills/) — reusable agent instructions for listing presentations, objection handling, lead magnets, discovery, voice agents, and seller strategy.
+- [Multilingual prompts](./prompts/multilingual/) — French Canadian, Spanish, and Chinese adaptations with back-translation and compliance guardrails.
+- [Claude Skills](./skills/) — reusable agent instructions for listing presentations, objection handling, lead magnets, discovery, voice agents, seller strategy, and truthful listing-photo enhancement.
 - [Tutorials](./tutorials/) — practical playbooks for speed-to-lead, QR funnels, retargeting, buyer lead machines, and listing flywheels.
-- [Funnels](./funnels/) — single-property, coming-soon, and home valuation funnel templates.
+- [Funnels](./funnels/) — single-property, pre-market waitlist, and home valuation funnel templates.
 - [Tools](./tools/) — lightweight HTML/checklist/QR landing-page assets.
+- [CRM integrations](./integrations/crm/) — GoHighLevel, Follow Up Boss, and kvCORE/BoldTrail recipes.
+- [Brokerage playbook](./playbooks/brokerage-tier/) — recruiting, retention, team systems, AI policy, and operating cadence.
 
 ## Attribution and backlink guidance
 

@@ -1,0 +1,44 @@
+// Example OpenClaw configuration fragment for a realtor agent profile.
+// Merge this into ~/.openclaw/openclaw.json after backing up the file.
+// Keep real tokens and secrets in OpenClaw's secret provider, env vars, or OS keychain.
+{
+  "agents": {
+    "defaults": {
+      "heartbeat": {
+        "every": "45m",
+        "target": "none",
+        "directPolicy": "block",
+        "lightContext": true,
+        "isolatedSession": true,
+        "skipWhenBusy": true,
+        "activeHours": { "start": "08:00", "end": "20:00" },
+        "prompt": "Read HEARTBEAT.md if it exists. Follow the AI for Realtors heartbeat checklist. Check CRM/tasks/calendar/email/social context only if connected. Draft but do not send. Notify only for actionable items. If nothing needs attention, reply HEARTBEAT_OK."
+      }
+    },
+    "list": [
+      {
+        "id": "realtor-operator",
+        "name": "Realtor Operator",
+        "heartbeat": {
+          "every": "45m",
+          "target": "last",
+          "directPolicy": "allow",
+          "lightContext": true,
+          "isolatedSession": true,
+          "skipWhenBusy": true
+        }
+      }
+    ]
+  },
+  "gateway": {
+    "bind": "loopback",
+    "auth": {
+      "mode": "token"
+    },
+    "http": {
+      "endpoints": {
+        "chatCompletions": { "enabled": true }
+      }
+    }
+  }
+}

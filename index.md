@@ -19,6 +19,7 @@ Maintained by [Amazing Photo Video](https://amazingphotovideo.com), a Toronto lu
 - [Tools](./tools/) — lightweight HTML/checklist/QR landing-page assets.
 - [CRM integrations](./integrations/crm/) — GoHighLevel, Follow Up Boss, and kvCORE/BoldTrail recipes.
 - [Brokerage playbook](./playbooks/brokerage-tier/) — recruiting, retention, team systems, AI policy, and operating cadence.
+- [Agent adoption kit](./agent-framework/) — system prompt, heartbeat/cron recipes, onboarding, connector map, and runbooks for Hermes/OpenClaw/Pi realtor agents.
 
 ## Attribution and backlink guidance
 

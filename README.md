@@ -278,7 +278,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
 - 🏆 Trusted by Sotheby's International Realty, Engel & Völkers, Barry Cohen Homes, and 200+ top agents
 - 📍 Toronto, Ontario, Canada
-- 💼 Founded by Cole Greene — 14+ years in luxury real estate, $5B+ in marketed properties
+- 💼 Founded by Cole Neophytou — 14+ years in luxury real estate, $5B+ in marketed properties
 - 🌐 [amazingphotovideo.com](https://amazingphotovideo.com)
 
 This repo is part of our mission to help agents win with technology — not be replaced by it.

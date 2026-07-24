@@ -1,0 +1,58 @@
+{
+  "$schema": "./site.schema.json",
+  "preset": "luxury-editorial",
+  "agent": {
+    "name": "Maya Chen",
+    "pronouns": "she/her",
+    "title": "REALTOR®",
+    "brokerage": "Northline Realty, Brokerage",
+    "licenseLabel": "RECO registration",
+    "licenseNumber": "FICT-000042",
+    "markets": ["West Toronto", "Etobicoke", "Mississauga"],
+    "biography": "Maya helps clients make deliberate moves across Toronto's west end. Her process centres on clear preparation, careful market context, and calm communication from first conversation to closing.",
+    "email": "maya@example.test",
+    "phone": "+1 416 555 0142",
+    "officeAddress": "123 Example Avenue, Toronto, ON",
+    "logo": "/brand-mark.svg",
+    "headshot": "/headshot.svg",
+    "social": [{ "label": "Instagram", "url": "https://example.test/maya-instagram" }]
+  },
+  "brand": {
+    "primary": "#18332d", "accent": "#b17846", "paper": "#f3efe6", "ink": "#17201d",
+    "displayFont": "Georgia, 'Times New Roman', serif", "bodyFont": "Arial, Helvetica, sans-serif"
+  },
+  "copy": {
+    "eyebrow": "Measured advice for meaningful moves",
+    "headline": "A considered way to buy and sell in Toronto's west end.",
+    "introduction": "Local guidance, strong presentation, and a plan built around your actual timeline.",
+    "valuationCta": "Request a property conversation",
+    "contactNote": "Share only the details needed for a first conversation. Do not send financial records or identification through this form."
+  },
+  "services": [
+    { "title": "Seller representation", "description": "A preparation, positioning, and launch plan tailored to the property and current competition." },
+    { "title": "Buyer representation", "description": "A focused search with property context, offer preparation, and room for careful decisions." },
+    { "title": "Relocation planning", "description": "Practical sequencing for clients moving into, out of, or across the western GTA." }
+  ],
+  "testimonials": [],
+  "stats": [],
+  "featuredListings": [
+    { "id": "sample-1", "status": "Featured example", "address": "42 Example Crescent", "city": "Toronto", "price": "$1,248,000", "beds": 3, "baths": 2, "image": "/listing-house.svg", "alt": "Fictional brick home illustration", "url": "#contact", "manual": true },
+    { "id": "sample-2", "status": "Portfolio example", "address": "8 Sample Lane", "city": "Etobicoke", "price": "$899,000", "beds": 2, "baths": 2, "image": "/listing-condo.svg", "alt": "Fictional condominium illustration", "url": "#contact", "manual": true }
+  ],
+  "neighbourhoods": [
+    { "name": "Bloor West Village", "summary": "Main-street energy, transit access, and a varied stock of century homes and apartments.", "link": "#contact" },
+    { "name": "Mimico", "summary": "A lakeside district with condos, established streets, and several distinct pockets.", "link": "#contact" },
+    { "name": "Port Credit", "summary": "A walkable waterfront centre with a mix of detached homes, townhomes, and condos.", "link": "#contact" }
+  ],
+  "seo": { "siteUrl": "https://example.test", "title": "Maya Chen | West Toronto Real Estate", "description": "Fictional demonstration site for a west Toronto real estate professional.", "locale": "en_CA" },
+  "admins": ["maya@example.test"],
+  "consent": {
+    "privacyUrl": "https://example.test/privacy", "requiredLabel": "I agree that Maya Chen may use these details to respond to my request.",
+    "marketingOptionalLabel": "I would also like occasional real estate updates. I can unsubscribe at any time.",
+    "disclaimer": "This fictional demonstration is not intended to solicit clients already under contract with another real estate professional. Listing examples are manually entered sample data, not a live MLS®, VOW, or IDX feed. Independently owned and operated."
+  },
+  "apv": {
+    "mediaConsultationUrl": "https://amazingphotovideo.com", "mediaPlanningUrl": "https://amazingphotovideo.com",
+    "footerLabel": "Designed and powered with Amazing Photo Video"
+  }
+}

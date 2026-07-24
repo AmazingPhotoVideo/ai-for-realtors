@@ -2,11 +2,11 @@
 
 # AI for Realtors
 
-### AI prompts, Claude Skills, and proven tutorials for real estate agents who want more listings, more buyers, and more closed deals.
+### Practical AI prompts, skills, tutorials, blueprints, and starter tools for real estate agents.
 
 <br />
 
-**Maintained by [Amazing Photo Video (APV)](https://amazingphotovideo.com)** — Toronto's luxury real estate media company, trusted by Sotheby's International Realty, Engel & Völkers, and Barry Cohen Homes (Cohen Homes & Estates). We've helped market over **$5 billion** in luxury property.
+**Maintained by [Amazing Photo Video (APV)](https://amazingphotovideo.com)** — Toronto's luxury real estate media company, trusted by Sotheby's International Realty, Engel & Völkers, and Barry Cohen Homes (Cohen Homes & Estates). We've helped market **$5B+** in luxury property.
 
 <br />
 
@@ -19,16 +19,19 @@
 
 ## What is this?
 
-**AI for Realtors** is a free, open-source collection of:
+**AI for Realtors** is a publicly available collection of:
 
-- 🧠 **AI prompts** — battle-tested prompts for ChatGPT, Claude, Gemini, and Perplexity, written specifically for real estate workflows
+- 🧠 **AI prompts** — ready-to-use prompts for ChatGPT, Claude, Gemini, and Perplexity, written specifically for real estate workflows
 - 🛠️ **Claude Skills** — reusable skill modules that turn Claude into a specialist agent for listing presentations, lead nurture, market reports, and more
 - 📚 **Tutorials** — step-by-step guides showing exactly how to get more listing leads, more buyer leads, and convert the ones you already have
 - 🎯 **Funnels & templates** — landing pages, lead magnets, QR sign riders, ad scripts, and retargeting blueprints
+- 🎨 **Creative production kits** — populated flyer/social packs, single-property pages, and agent website + CRM starters
 
-Built by working agents and the team behind APV — not theory, not vibes. Everything here has been used on real listings, with real budgets, in a real market.
+Built by working agents and the team behind APV — not theory, not vibes. Everything should be practical enough to use on a real listing or in a real real-estate business.
 
-> **Why open source?** Because the agents winning in 2026 aren't the ones with the best secret sauce. They're the ones executing the basics 10x faster with AI. We'd rather raise the floor for the whole industry than gatekeep prompts that should be standard.
+> **Packaging note:** Prompts, tutorials, and other public learning resources can be browsed and reused as described in their files. Covered design, page, site, and other creative assets follow APV's separate [pilot policy](./docs/design-asset-licensing.md), including attribution and commercial-use limits. The repository as a whole is not presented as open source or entirely free.
+
+Prefer a guided route? [Open the live no-code resource hub](https://amazingphotovideo.github.io/ai-for-realtors/), browse the [fictional creative gallery](./gallery.md), or follow one of the [five starter paths](./starter-paths/README.md).
 
 ---
 
@@ -39,6 +42,7 @@ Built by working agents and the team behind APV — not theory, not vibes. Every
 - [🏡 Get more buyer leads](#-get-more-buyer-leads)
 - [💬 Converting leads](#-converting-leads-into-appointments-and-clients)
 - [🚀 Leveraging your listings](#-leveraging-your-listings)
+- [🎨 Realtor creative platform](#-realtor-creative-platform)
 - [🔌 CRM integrations](#-crm-integrations)
 - [🖼️ Listing photo AI enhancement](#️-listing-photo-ai-enhancement)
 - [🌎 Multilingual prompt library](#-multilingual-prompt-library)
@@ -116,7 +120,7 @@ A lead is a liability until it books. This section is everything that happens *b
 | **Pre-Appointment Discovery Bot** | Sends a smart questionnaire before the meeting so you walk in knowing everything | [`/skills/discovery-bot/`](./skills/discovery-bot) |
 | **Buyer Consultation Script** | Modernized buyer agency conversation built for the post-NAR-settlement era | [`/prompts/converting/buyer-consultation/`](./prompts/converting/buyer-consultation) |
 | **Listing Appointment Checklist** | Interactive HTML checklist + AI debrief prompt for after the meeting | [`/tools/listing-appointment-checklist.html`](./tools/listing-appointment-checklist.html) |
-| **Tutorial: The 5-Minute Rule** | Why speed-to-lead under 5 minutes triples conversion — and how to actually do it with AI | [`/tutorials/speed-to-lead.md`](./tutorials/speed-to-lead.md) |
+| **Tutorial: The 5-Minute Rule** | A practical workflow for improving speed-to-lead with AI-assisted routing and follow-up | [`/tutorials/speed-to-lead.md`](./tutorials/speed-to-lead.md) |
 
 ---
 
@@ -136,8 +140,8 @@ Every listing is a free billboard, lead magnet, and content engine. Most agents 
 | Asset | What it does | Path |
 |---|---|---|
 | **Smart Sign Rider QR Funnel** | QR → mobile listing page → SMS auto-responder → CRM. Full build guide. | [`/tutorials/qr-sign-rider-funnel.md`](./tutorials/qr-sign-rider-funnel.md) |
-| **Drive-By Lead Capture Page** | Mobile-first landing page template (HTML) optimized for sub-3-second load | [`/tools/drive-by-landing/`](./tools/drive-by-landing) |
-| **Open House QR Sign-In** | No-app-required check-in flow that pushes leads straight into your CRM | [`/tools/open-house-qr/`](./tools/open-house-qr) |
+| **Drive-By Lead Capture Blueprint** | Mobile-first page specification, copy, consent, routing, and implementation checklist; no HTML template is included | [`/tools/drive-by-landing/`](./tools/drive-by-landing) |
+| **Open House QR Sign-In** | Ready local browser generator for a check-in link and printable table tent. Connect a brokerage-approved form/CRM before production use. | [`/tools/open-house-qr/`](./tools/open-house-qr) |
 
 ### Lead magnets
 
@@ -151,7 +155,7 @@ Every listing is a free billboard, lead magnet, and content engine. Most agents 
 
 | Asset | What it does | Path |
 |---|---|---|
-| **Single-Property Funnel** | One-listing landing page + capture + nurture (GoHighLevel + Vercel templates included) | [`/funnels/single-property/`](./funnels/single-property) |
+| **Single-Property Funnel Blueprint** | Page, capture, routing, nurture, retargeting, and measurement plan; Vercel and GoHighLevel templates are not included | [`/funnels/single-property/`](./funnels/single-property) |
 | **Pre-Market Waitlist Funnel** | Build a waitlist *before* the listing hits MLS — generates buyer + seller leads | [`/funnels/pre-market-waitlist/`](./funnels/pre-market-waitlist) |
 | **Home Valuation Funnel** | Seller magnet funnel with automated CMA follow-up | [`/funnels/home-valuation/`](./funnels/home-valuation) |
 
@@ -170,6 +174,24 @@ Every listing is a free billboard, lead magnet, and content engine. Most agents 
 | **One Listing → 30 Pieces of Content** | A single prompt that outputs 30 social posts, 5 emails, 3 reels scripts, and 1 blog from one listing | [`/prompts/leverage/content-multiplier/`](./prompts/leverage/content-multiplier) |
 | **AI Video Generation Prompts** | Veo 3, Sora, and WAN prompts tuned for real estate b-roll | [`/prompts/leverage/ai-video/`](./prompts/leverage/ai-video) |
 | **Property Story Generator** | Writes the "story" of a home — the part that makes buyers fall in love | [`/prompts/leverage/property-story/`](./prompts/leverage/property-story) |
+
+---
+
+## 🎨 Realtor creative platform
+
+Turn approved listing facts, media, and agent branding into polished assets without rebuilding every campaign from scratch.
+
+| Toolkit | What it produces | Builder skill |
+|---|---|---|
+| **Realtor Design Packs** | Three design families with print flyers, social squares, portrait posts, stories, and export-ready HTML | [`/skills/realtor-design-pack-builder/`](./skills/realtor-design-pack-builder) |
+| **Single-Property Pages** | Three mobile-first listing-page designs with galleries, CTAs, forms, SEO, and manual structured listing data | [`/skills/single-property-page-builder/`](./skills/single-property-page-builder) |
+| **Agent Website + CRM Builder** | Three agent-site design presets plus a Realtor-focused lead pipeline starter | [`/skills/realtor-site-crm-builder/`](./skills/realtor-site-crm-builder) |
+
+Start with the [creative-platform overview](./docs/realtor-creative-platform.md). For the next Canada/US product waves, see the [source-grounded Realtor product roadmap](./docs/canada-us-product-roadmap.md). Every toolkit includes fictional sample data, repeatable population steps, validation, compliance boundaries, and APV attribution.
+
+Manual listing data works out of the box. Live MLS, VOW, IDX, sold-data, or board feeds require the appropriate brokerage/board/vendor permissions and are not bundled. Contact [Amazing Photo Video](https://amazingphotovideo.com) to discuss professional media, implementation, or a compliant integration project.
+
+Public design/site outputs retain an APV credit by default. Attribution-free, white-label, source-resale, and higher-volume commercial use require a written agreement. The repository has [no general open-source licence](./LICENSE); covered creative assets use the separate [design asset licensing policy](./docs/design-asset-licensing.md).
 
 ---
 
@@ -233,13 +255,7 @@ Claude Skills are folders Claude reads automatically when it detects a matching 
 2. **In Claude Code or the API:** Place the skill folder in your skills directory — Claude reads `SKILL.md` and follows it.
 3. **In ChatGPT / Gemini:** Open the skill's `SKILL.md` file and paste the contents as a system prompt or custom instruction.
 
-Each skill folder contains:
-```
-skill-name/
-├── SKILL.md          # The instructions Claude reads
-├── examples/         # Real input/output examples
-└── templates/        # Reusable assets (HTML, JSON, etc.)
-```
+Each skill folder is organized around a `SKILL.md` instruction file. A skill may embed examples, checklists, or reusable blocks directly in that file; do not assume separate `examples/` or `templates/` folders exist. Browse the [skills index](./skills/README.md) to choose one.
 
 Full guide: [`/tutorials/using-claude-skills.md`](./tutorials/using-claude-skills.md)
 
@@ -278,7 +294,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
 - 🏆 Trusted by Sotheby's International Realty, Engel & Völkers, Barry Cohen Homes, and 200+ top agents
 - 📍 Toronto, Ontario, Canada
-- 💼 Founded by Cole Neophytou — 14+ years in luxury real estate, $5B+ in marketed properties
+- 💼 Founded by Cole Neophytou — 14+ years in luxury real estate media, **$5B+** in properties marketed
 - 🌐 [amazingphotovideo.com](https://amazingphotovideo.com)
 
 This repo is part of our mission to help agents win with technology — not be replaced by it.

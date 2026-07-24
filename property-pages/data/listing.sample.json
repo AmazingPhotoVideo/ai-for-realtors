@@ -1,0 +1,84 @@
+{
+  "status": "For Sale",
+  "address": {
+    "display": "full",
+    "street": "18 Cedar Lantern Lane",
+    "locality": "Northhaven",
+    "region": "Ontario",
+    "postalCode": "N0N 1A1",
+    "country": "CA",
+    "customLabel": "A Cedar Lantern Residence"
+  },
+  "price": {
+    "visible": true,
+    "amount": 1385000,
+    "currency": "CAD"
+  },
+  "specs": {
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "interiorSize": 2470,
+    "interiorUnit": "sq ft",
+    "parking": "2-car",
+    "propertyType": "Detached"
+  },
+  "description": "A fictional cedar-clad retreat pairs quiet, light-filled interiors with a generous garden and an easy connection to Northhaven’s village centre.",
+  "features": [
+    "Morning light across the open kitchen",
+    "Sheltered garden room for long-table dinners",
+    "Flexible main-floor studio or guest space",
+    "Trail access at the end of the lane",
+    "Finished lower level with separate entry",
+    "EV-ready two-car garage"
+  ],
+  "media": {
+    "gallery": [
+      {
+        "src": "assets/sample-exterior.svg",
+        "alt": "Illustrated exterior of a fictional cedar-clad home at dusk",
+        "caption": "A warm arrival beneath mature trees — fictional sample artwork."
+      },
+      {
+        "src": "assets/sample-kitchen.svg",
+        "alt": "Illustrated sunlit kitchen with a long island and oak cabinetry",
+        "caption": "The kitchen is organized around gathering — fictional sample artwork."
+      },
+      {
+        "src": "assets/sample-living.svg",
+        "alt": "Illustrated living room with large garden-facing windows",
+        "caption": "Soft materials and garden light — fictional sample artwork."
+      },
+      {
+        "src": "assets/sample-garden.svg",
+        "alt": "Illustrated private garden with a dining terrace and native plants",
+        "caption": "A private garden room — fictional sample artwork."
+      }
+    ],
+    "videoUrl": "https://example.com/fictional-property-film",
+    "tour3dUrl": "https://example.com/fictional-3d-tour",
+    "floorPlanUrl": "https://example.com/fictional-floor-plan.pdf"
+  },
+  "openHouses": [
+    {
+      "start": "2026-08-08T14:00:00-04:00",
+      "end": "2026-08-08T16:00:00-04:00",
+      "note": "Please check in with the host"
+    }
+  ],
+  "location": {
+    "label": "Northhaven Village",
+    "mapUrl": "https://www.openstreetmap.org/"
+  },
+  "agent": {
+    "name": "Maya Chen",
+    "title": "Broker",
+    "brokerage": "North & Cedar Realty",
+    "email": "maya.chen@example.com",
+    "phone": "+1 416 555 0147",
+    "website": "https://example.com/maya-chen"
+  },
+  "disclaimers": [
+    "Fictional demonstration listing. All names, facts, artwork, dates, and contact details are illustrative only.",
+    "Measurements and property information must be independently verified before a real page is published. Not intended to solicit buyers or sellers under contract."
+  ]
+}

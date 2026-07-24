@@ -1,0 +1,22 @@
+# macOS metadata
+.DS_Store
+
+# Generated creative exports
+/build/
+**/output/
+**/outputs/
+**/dist/
+
+# JavaScript build and dependency artifacts
+node_modules/
+.next/
+
+# Local environment and secrets
+/.hermes/
+.env
+.env.*
+!.env.example
+
+# Python cache
+__pycache__/
+*.py[cod]

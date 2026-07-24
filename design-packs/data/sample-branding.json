@@ -1,0 +1,17 @@
+{
+  "branding": {
+    "agent_name": "Jordan Lee",
+    "agent_title": "REALTOR\u00ae \u00b7 Fictional sample",
+    "phone": "(555) 014-7284",
+    "email": "jordan@example.invalid",
+    "brokerage": "Harbour & Pine Realty \u00b7 Fictional",
+    "logo": "../assets/placeholder-logo.svg",
+    "headshot": "../assets/placeholder-headshot.svg",
+    "primary_color": "#17332d",
+    "accent_color": "#c86b4a",
+    "paper_color": "#f3efe7",
+    "dark_color": "#161c1a",
+    "font_display": "Georgia, 'Times New Roman', serif",
+    "font_body": "Arial, Helvetica, sans-serif"
+  }
+}

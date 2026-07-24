@@ -1,105 +1,103 @@
-# Open House QR Sign-In
+# Consent-safe Open House QR Generator
 
-A no-app QR check-in flow that captures real buyers, respects privacy, and creates instant follow-up while the home is still fresh in the visitor’s mind.
+A working, dependency-free, browser-local generator for open-house QR signage and review-ready consent language.
 
-## Flow
+Open [`index.html`](./index.html) directly in a modern browser. No install, build step, server, account, or internet connection is required.
 
-Door sign/table tent → QR form → thank-you page with property packet → CRM tags → instant SMS/email → agent task → post-open-house nurture.
+## What works locally
 
-## Form fields
+The standalone page:
 
-Required:
-- First name
-- Mobile or email
-- Are you working with an agent? yes/no/prefer not to say
-- What brought you in? buying / neighbour / agent preview / curious
+- accepts configurable property, agent, brokerage, check-in URL, property-packet URL, privacy URL/contact, retention period, and optional marketing-purpose text;
+- generates a standards-valid QR code in-browser (error-correction level M) with a four-module quiet zone;
+- renders a letter-size, two-sided table tent suitable for folding and printing;
+- provides the check-in URL as a visible no-camera fallback;
+- creates suggested operational packet-request language, a separate **unchecked** optional-marketing consent, a represented-buyer routing warning, and a confirmation/receipt template;
+- copies the check-in link or generated language;
+- downloads the QR as SVG and prints the table tent; and
+- clears the form without retaining its contents.
 
-Optional:
-- Timeline
-- Budget range
-- Must-have feature
-- Consent checkbox for SMS/email follow-up where required
+The tool has no network requests, analytics, cookies, storage, external scripts, external fonts, or persistence. All input and output remain in the open browser tab.
 
-## Table tent copy
+## What still requires integration
 
-**Check in for the property packet**
+This page **does not create a visitor form, collect visitor details, deliver a packet, send email/SMS, write consent records, or connect to a CRM**. A production deployment requires:
 
-Scan for disclosures, floor plans, offer updates, and similar homes.
+1. A brokerage-approved form or CRM endpoint at the check-in URL.
+2. Separate handling for the operational packet request and optional marketing consent.
+3. An optional marketing checkbox that is never preselected.
+4. Consent evidence appropriate to each channel and jurisdiction (for example: disclosure version, affirmative choice, timestamp, source, sender identity, and revocation status).
+5. A confirmation/receipt sent or shown by the production system.
+6. Privacy, retention, security, accessibility, agency, and records-management review.
+7. Represented-buyer routing that avoids buyer-agency solicitation and follows local rules and brokerage policy.
 
-[QR]
+The packet URL belongs in the operational confirmation path. Do not make packet access conditional on marketing consent.
 
-No app needed. Your information is used only for property follow-up and market updates from [AGENT/BROKERAGE].
+## Use
 
-## Thank-you page copy
+1. Download or clone this repository.
+2. Open `tools/open-house-qr/index.html` in Chrome, Safari, Firefox, or Edge.
+3. Choose **Load fictional sample** to inspect the output, or enter approved production values.
+4. Choose **Generate**.
+5. Review all language with the brokerage and counsel/compliance resources as appropriate.
+6. Test the QR with at least two camera/scanner apps and verify the exact destination.
+7. Choose **Download QR (SVG)** for another approved layout, or **Print table tent** and print at 100% scale.
+8. Confirm the live check-in endpoint correctly separates packet delivery from optional marketing consent before public use.
 
-Thanks for visiting [ADDRESS].
+> The sample values and `example.com` links are fictional placeholders and are not a working visitor-data endpoint.
 
-Choose your next step:
-- Download the property packet
-- Ask a question about the home
-- Book a private second showing
-- Get similar listings
-- Request a value range for your home nearby
+## Suggested production form structure
 
-## Immediate SMS
+### Required or operational fields
 
-> Thanks for visiting [ADDRESS] today — it’s [AGENT]. Here’s the property packet: [LINK]. What did you think: 1) interested, 2) maybe, 3) not the one? Reply STOP to opt out.
+Keep fields proportionate to the stated visit purpose. A brokerage might request:
 
-## Immediate email
+- first name;
+- an email address or mobile number needed to deliver the requested packet;
+- represented / unrepresented / prefer not to say; and
+- acknowledgement of the operational packet-request and privacy language.
 
-Subject: Property packet for [ADDRESS]
+Avoid describing operational delivery as marketing consent. If represented, route property, showing, and offer questions through the visitor's representative where required.
 
-Hi [FIRST],
+### Optional marketing choice
 
-Thanks for stopping by [ADDRESS]. Here are the details in one place:
+Place optional marketing consent separately, explain the specific purpose and channels, and leave it unchecked. The generated wording is a drafting aid—not legal advice or a jurisdiction-complete disclosure. Add applicable sender identity, recurring/automated message terms, frequency, message/data rates, STOP/HELP instructions, unsubscribe method, and links to required policies.
 
-- Photos/tour: [LINK]
-- Floor plan/disclosures if available: [LINK]
-- Offer or showing instructions: [LINK]
-- Similar homes: [LINK]
+### Receipt and retention
 
-If you are represented, please have your agent contact me directly for showing and offer questions.
+The live form/CRM should record the visitor's actual selection and provide a confirmation that distinguishes:
 
-[AGENT]
+- the requested packet or visit administration;
+- whether optional marketing consent was granted; and
+- how to ask a privacy question, withdraw marketing consent, or exercise applicable data rights.
 
-## Post-open-house nurture
+Delete or anonymize data according to the stated retention period and brokerage policy. Do not share identifiable visitor data with sellers beyond what is lawful, disclosed, and approved.
 
-- Hour 0: SMS + email packet
-- Hour 2: agent reviews hot leads and calls serious visitors
-- Day 1: “What did you think after sleeping on it?”
-- Day 3: similar listings or price/status update
-- Day 7: buyer consult CTA or homeowner value CTA
-- Day 14: neighbourhood market report
+## Verification for maintainers
 
-## CRM tagging
+The file is intentionally self-contained. Useful checks after edits:
 
-Tags: `open-house`, `listing:[slug]`, `represented`, `unrepresented`, `neighbour`, `hot`, `needs-financing`, `seller-curious`.
+```bash
+# Confirm there are no remote runtime assets or persistence APIs.
+rg 'src="https?://|href="https?://.*stylesheet|fetch\(|XMLHttpRequest|localStorage|sessionStorage|indexedDB' tools/open-house-qr/index.html
 
-Stages: Checked in → Sent packet → Responded → Showing/consult requested → Appointment booked → Long-term nurture.
+# Extract inline scripts and syntax-check them with Node.
+python3 - <<'PY'
+from pathlib import Path
+import re
+html = Path('tools/open-house-qr/index.html').read_text()
+scripts = re.findall(r'<script[^>]*>(.*?)</script>', html, re.S)
+Path('/tmp/open-house-qr.js').write_text('\n'.join(scripts))
+PY
+node --check /tmp/open-house-qr.js
+```
 
-## Automation rules
+Also generate the fictional sample, scan its QR, print-preview the tent, and exercise every button.
 
-- If “working with agent = yes,” route to listing-agent follow-up only and avoid buyer-agency solicitation.
-- If “neighbour,” send seller-value CTA, not buyer pressure.
-- If “timeline under 90 days,” create same-day call task.
-- If no consent checkbox, send only transactional email required to deliver requested packet and suppress marketing texts.
+## QR implementation and license
 
-## KPI targets
-
-- 70%+ visitor check-in rate when sign is visible and host asks consistently
-- 30–50% packet click rate
-- 10–25% reply rate to same-day SMS
-- 1–3 appointments from a strong open house weekend
-
-## Compliance cautions
-
-- Follow local agency disclosure rules and brokerage policy.
-- Do not solicit represented buyers; direct them through their agent.
-- Use clear consent for automated SMS/email and include STOP.
-- Keep visitor data in your CRM; do not share with seller beyond appropriate aggregate feedback unless permitted.
+The embedded QR encoder is [`qrcode-generator`](https://github.com/kazuhikoarase/qrcode-generator) by Kazuhiko Arase, included directly so the page works offline. It is licensed under the MIT License; its copyright and license notice remain in `index.html`. The implementation is based on JIS X 0510. “QR Code” is a registered trademark of DENSO WAVE INCORPORATED.
 
 ## APV attribution
 
-Do not put APV credit on the sign-in form if it distracts from conversion. If the property packet includes a public resources page, the footer can say:
-
-> Open-house follow-up workflow adapted from Amazing Photo Video resources: https://amazingphotovideo.com
+A small [Amazing Photo Video](https://amazingphotovideo.com) credit appears on the public generator and printable table tent. It is intentionally absent from the private follow-up/receipt copy.

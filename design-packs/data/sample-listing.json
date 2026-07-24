@@ -1,0 +1,30 @@
+{
+  "listing": {
+    "status_label": "FOR SALE",
+    "price": "$1,285,000",
+    "address": {
+      "street": "1847 Cedar Lane",
+      "city_region": "Maple Harbour, Ontario"
+    },
+    "property_type": "Detached home",
+    "beds": "4",
+    "baths": "3",
+    "interior": "2,640 sq ft",
+    "lot": "52 \u00d7 118 ft",
+    "headline": "Calm design. Room to gather.",
+    "description": "A light-filled fictional residence with thoughtful gathering spaces, a garden-facing kitchen, and a quiet main-floor study.",
+    "feature_1": "Garden-facing kitchen",
+    "feature_2": "Main-floor study",
+    "feature_3": "Finished lower level",
+    "feature_4": "Walkable village setting",
+    "open_house": "Fictional preview \u00b7 Saturday, 2\u20134 PM",
+    "cta": "Book a private tour",
+    "website": "example.invalid/1847-cedar",
+    "qr_label": "SCAN FOR DETAILS",
+    "disclaimer": "Fictional sample only. Replace with brokerage-approved disclosures before publishing.",
+    "images": {
+      "hero": "../assets/placeholder-home.svg",
+      "secondary": "../assets/placeholder-interior.svg"
+    }
+  }
+}

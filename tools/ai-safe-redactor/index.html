@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>AI-Safe Redactor</title>
+  <style>
+    :root {
+      --ink: #17332e;
+      --muted: #60706c;
+      --paper: #f6f3eb;
+      --surface: #fffdf8;
+      --line: #d8d8cc;
+      --brand: #126a5a;
+      --brand-dark: #0b4f43;
+      --accent: #dff1e8;
+      --warning: #8a4f14;
+      --warning-bg: #fff3dc;
+      --shadow: 0 16px 48px rgba(23, 51, 46, .09);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(18, 106, 90, .10), transparent 28rem),
+        var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    button, textarea { font: inherit; }
+
+    button:focus-visible, textarea:focus-visible, a:focus-visible {
+      outline: 3px solid #59a899;
+      outline-offset: 3px;
+    }
+
+    .shell { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+
+    header { padding: 54px 0 28px; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 14px;
+      padding: 6px 10px;
+      border: 1px solid rgba(18, 106, 90, .22);
+      border-radius: 999px;
+      color: var(--brand-dark);
+      background: rgba(255, 253, 248, .75);
+      font-size: .78rem;
+      font-weight: 750;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+      content: "";
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.6rem, 7vw, 5.25rem);
+      font-weight: 500;
+      letter-spacing: -.045em;
+      line-height: .98;
+    }
+
+    .lede { max-width: 720px; margin: 20px 0 0; color: var(--muted); font-size: 1.08rem; }
+
+    .privacy-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      margin-top: 24px;
+      padding: 15px 18px;
+      border: 1px solid #b8d8ce;
+      border-radius: 12px;
+      background: var(--accent);
+      font-size: .92rem;
+    }
+
+    .privacy-strip strong { color: var(--brand-dark); }
+    .privacy-strip span::before { content: "✓"; margin-right: 7px; color: var(--brand); font-weight: 800; }
+
+    main { padding: 0 0 54px; }
+
+    .workspace {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      background: #faf8f2;
+    }
+
+    .toolbar-group { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    button {
+      min-height: 42px;
+      padding: 9px 14px;
+      border: 1px solid #bfc8c3;
+      border-radius: 9px;
+      color: var(--ink);
+      background: #fff;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+
+    button:hover:not(:disabled) { border-color: var(--brand); background: #f1f8f5; transform: translateY(-1px); }
+    button:active:not(:disabled) { transform: translateY(0); }
+    button:disabled { cursor: not-allowed; opacity: .48; }
+
+    .primary { border-color: var(--brand); color: #fff; background: var(--brand); }
+    .primary:hover:not(:disabled) { color: #fff; background: var(--brand-dark); }
+    .quiet { border-color: transparent; background: transparent; }
+
+    .editors { display: grid; grid-template-columns: 1fr 1fr; }
+
+    .editor { min-width: 0; padding: 22px; }
+    .editor + .editor { border-left: 1px solid var(--line); background: #fbfcf9; }
+
+    .editor-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+    .editor-heading h2 { margin: 0; font-size: 1rem; }
+    .counter { color: var(--muted); font-size: .78rem; font-variant-numeric: tabular-nums; }
+
+    textarea {
+      display: block;
+      width: 100%;
+      min-height: 390px;
+      resize: vertical;
+      padding: 16px;
+      border: 1px solid #c7cec9;
+      border-radius: 12px;
+      color: #243733;
+      background: #fff;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: .9rem;
+      line-height: 1.62;
+    }
+
+    textarea::placeholder { color: #86928e; }
+    textarea[readonly] { background: #f6f8f5; }
+
+    .review {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(250px, .42fr);
+      gap: 20px;
+      padding: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .review h2, .review h3 { margin: 0; font-size: 1rem; }
+    .review-intro { margin: 5px 0 14px; color: var(--muted); font-size: .9rem; }
+
+    .findings { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .finding {
+      display: grid;
+      grid-template-columns: 10px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+    }
+    .finding-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); }
+    .finding strong { display: block; font-size: .87rem; }
+    .finding small { display: block; color: var(--muted); }
+    .finding-count { color: var(--brand-dark); font-weight: 800; font-variant-numeric: tabular-nums; }
+
+    .empty-state {
+      padding: 24px;
+      border: 1px dashed #bdc8c2;
+      border-radius: 10px;
+      color: var(--muted);
+      text-align: center;
+      background: #fafbf8;
+    }
+
+    .caution {
+      align-self: start;
+      padding: 16px;
+      border: 1px solid #efd19d;
+      border-radius: 12px;
+      background: var(--warning-bg);
+    }
+    .caution h3 { color: var(--warning); }
+    .caution p { margin: 8px 0 0; color: #66431d; font-size: .88rem; }
+
+    .status {
+      min-height: 22px;
+      padding: 0 22px 18px;
+      color: var(--brand-dark);
+      font-size: .88rem;
+      font-weight: 650;
+    }
+
+    .limits {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 32px;
+      padding: 40px 0 14px;
+    }
+    .limits h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 2rem; font-weight: 500; }
+    .limits p { margin: 0; color: var(--muted); }
+    .limits ul { margin: 14px 0 0; padding-left: 20px; color: var(--muted); }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 0 36px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .82rem;
+    }
+    .credit { color: var(--brand-dark); font-weight: 700; }
+
+    @media (max-width: 780px) {
+      header { padding-top: 34px; }
+      .toolbar { align-items: stretch; flex-direction: column; }
+      .toolbar-group { display: grid; grid-template-columns: 1fr 1fr; }
+      .editors { grid-template-columns: 1fr; }
+      .editor + .editor { border-top: 1px solid var(--line); border-left: 0; }
+      textarea { min-height: 300px; }
+      .review, .limits { grid-template-columns: 1fr; }
+      footer { flex-direction: column; }
+    }
+
+    @media (max-width: 460px) {
+      .shell { width: min(100% - 20px, 1180px); }
+      h1 { font-size: 2.6rem; }
+      .editor, .review { padding: 16px; }
+      .status { padding-inline: 16px; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      header { padding-top: 0; }
+      .shell { width: 100%; }
+      .toolbar, .privacy-strip, .editor:first-child, .review, .status, .limits, footer, .eyebrow { display: none !important; }
+      .workspace { border: 0; box-shadow: none; }
+      .editors { display: block; }
+      .editor + .editor { border: 0; padding: 0; }
+      textarea[readonly] { min-height: 70vh; border: 0; background: #fff; }
+      h1 { font-size: 2.5rem; }
+      .lede { margin-bottom: 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="shell">
+    <p class="eyebrow">Private by design</p>
+    <h1>Share the context.<br>Not the sensitive details.</h1>
+    <p class="lede">A browser-local first pass for removing common personal, property, access, and transaction details before text is shared with an AI tool.</p>
+    <div class="privacy-strip" aria-label="Privacy features">
+      <span><strong>Runs only in this browser</strong></span>
+      <span>No uploads or accounts</span>
+      <span>No analytics or saved history</span>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="workspace" aria-labelledby="workspace-title">
+      <div class="toolbar">
+        <div class="toolbar-group">
+          <button id="sampleButton" type="button">Load fictional sample</button>
+          <button id="redactButton" class="primary" type="button">Redact sensitive details</button>
+        </div>
+        <div class="toolbar-group">
+          <button id="copyButton" type="button" disabled>Copy result</button>
+          <button id="downloadButton" type="button" disabled>Download TXT</button>
+          <button id="clearButton" class="quiet" type="button">Clear</button>
+        </div>
+      </div>
+
+      <h2 id="workspace-title" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Redaction workspace</h2>
+
+      <div class="editors">
+        <div class="editor">
+          <div class="editor-heading">
+            <label for="sourceText"><strong>Original text</strong></label>
+            <span id="sourceCount" class="counter">0 characters</span>
+          </div>
+          <textarea id="sourceText" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Paste listing notes, an email draft, or transaction context here…" aria-describedby="privacyNote"></textarea>
+        </div>
+
+        <div class="editor">
+          <div class="editor-heading">
+            <label for="resultText"><strong>Redacted result</strong></label>
+            <span id="resultCount" class="counter">0 characters</span>
+          </div>
+          <textarea id="resultText" readonly spellcheck="false" placeholder="Your locally redacted text will appear here." aria-describedby="reviewNote"></textarea>
+        </div>
+      </div>
+
+      <div class="review" id="reviewPanel">
+        <div>
+          <h2>Review findings</h2>
+          <p id="reviewNote" class="review-intro">Every replacement is summarized here. Review the complete result before using it.</p>
+          <ul id="findingsList" class="findings" aria-label="Detected sensitive information">
+            <li class="empty-state">No scan yet. Add text, then choose “Redact sensitive details.”</li>
+          </ul>
+        </div>
+        <aside class="caution" id="privacyNote">
+          <h3>Human review required</h3>
+          <p>This deterministic tool reduces obvious exposure; it cannot understand every context or guarantee anonymization. It may miss unusual formats or remove harmless text. Check every line and seek appropriate professional review before sharing sensitive, regulated, or legally significant material.</p>
+        </aside>
+      </div>
+
+      <div id="status" class="status" role="status" aria-live="polite" aria-atomic="true">Ready. Nothing leaves this page.</div>
+    </section>
+
+    <section class="limits" aria-labelledby="limits-title">
+      <div><h2 id="limits-title">Useful first pass.<br>Not a final clearance.</h2></div>
+      <div>
+        <p>The redactor looks for recognizable patterns and high-risk lines. It does not infer identity from subtle context, images, metadata, or combinations of otherwise ordinary facts.</p>
+        <ul>
+          <li>Use fictional or minimum-necessary context whenever possible.</li>
+          <li>Review placeholders, names, dates, unit details, and free-form notes manually.</li>
+          <li>Do not rely on this tool for compliance, legal, privacy, or security decisions.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <span>AI-Safe Redactor · Local, dependency-free, and community-ready.</span>
+    <span class="credit">Public resource by <a href="https://amazingphotovideo.com">Amazing Photo Video</a></span>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const sourceText = document.getElementById("sourceText");
+      const resultText = document.getElementById("resultText");
+      const sourceCount = document.getElementById("sourceCount");
+      const resultCount = document.getElementById("resultCount");
+      const findingsList = document.getElementById("findingsList");
+      const status = document.getElementById("status");
+      const sampleButton = document.getElementById("sampleButton");
+      const redactButton = document.getElementById("redactButton");
+      const copyButton = document.getElementById("copyButton");
+      const downloadButton = document.getElementById("downloadButton");
+      const clearButton = document.getElementById("clearButton");
+
+      const sample = `Fictional showing brief — 14 Cedar Lane, Toronto, ON M4B 1B3
+Contact: Morgan Lee, morgan.lee@example.com, (416) 555-0147
+Lockbox code: 4821. Alarm PIN is 9033.
+Offer price: $1,245,000 with a $50,000 deposit. Closing is October 18.
+Mortgage account: 0038492017
+Confidential note: Seller will accept less if the buyer waives financing.
+Please draft a concise follow-up after the showing.`;
+
+      const categories = [
+        { key: "confidential", label: "Confidential notes", placeholder: "[CONFIDENTIAL NOTE REDACTED]", detail: "Entire high-risk line removed" },
+        { key: "access", label: "Access and security details", placeholder: "[ACCESS DETAIL REDACTED]", detail: "Entire high-risk line removed" },
+        { key: "transaction", label: "Transaction-sensitive details", placeholder: "[TRANSACTION DETAIL REDACTED]", detail: "Entire high-risk line removed" },
+        { key: "email", label: "Email addresses", placeholder: "[EMAIL REDACTED]", detail: "Recognizable email pattern" },
+        { key: "phone", label: "Phone numbers", placeholder: "[PHONE REDACTED]", detail: "North American phone pattern" },
+        { key: "address", label: "Likely property addresses", placeholder: "[PROPERTY ADDRESS REDACTED]", detail: "Street-number and street-name pattern" },
+        { key: "postal", label: "Postal and ZIP codes", placeholder: "[POSTAL CODE REDACTED]", detail: "Canadian postal or US ZIP pattern" },
+        { key: "government", label: "Government identifiers", placeholder: "[GOVERNMENT ID REDACTED]", detail: "Labeled ID or SIN/SSN pattern" },
+        { key: "account", label: "Account identifiers", placeholder: "[ACCOUNT ID REDACTED]", detail: "Labeled account or routing number" },
+        { key: "money", label: "Financial amounts", placeholder: "[FINANCIAL AMOUNT REDACTED]", detail: "Currency symbol or code with amount" }
+      ];
+
+      const lineRules = [
+        {
+          category: categories[0],
+          pattern: /^\s*(?:confidential|private|internal|do not share|not for distribution|client[- ]only)(?:\s+(?:note|remarks?|comments?))?\s*[:—-]|\b(?:confidential|private)\s+(?:note|remarks?)\b/i
+        },
+        {
+          category: categories[1],
+          pattern: /\b(?:lock\s*box|lockbox|alarm|gate|garage|door|entry|access|security|keypad)\b(?:.{0,80}\b(?:code|pin|password|combination|instructions?|details?)\b|.{0,20}[:#-]\s*[A-Z0-9-]*\d[A-Z0-9-]*)|\b(?:code|pin|password|combination)\b.{0,35}\b(?:lock\s*box|lockbox|alarm|gate|garage|door|entry|access|security|keypad)\b/i
+        },
+        {
+          category: categories[2],
+          pattern: /\b(?:offer(?:ing)? price|purchase price|sale price|deposit|down payment|commission|closing|completion date|financing|mortgage|wire transfer|banking details?|trust funds?|balance due|seller will accept|buyer will pay|counteroffer|counter-offer)\b/i
+        }
+      ];
+
+      const inlineRules = [
+        { category: categories[3], pattern: /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi },
+        { category: categories[8], pattern: /\b(?:account|acct\.?|routing|transit|institution|client|file|reference)\s*(?:(?:number|no\.?|#|ID)\s*(?:[:#-]\s*)?|[:#-]\s*)[A-Z0-9-]{4,24}\b/gi },
+        { category: categories[4], pattern: /(?<!\d)(?:(?:\+?1)?\d{10}|(?:\+?1[\s.-]?)?(?:\(\d{3}\)|\d{3})[\s.-]\d{3}[\s.-]\d{4})(?:\s*(?:x|ext\.?|extension)\s*\d{1,6})?(?!\d)/gi },
+        { category: categories[5], pattern: /\b\d{1,6}\s+(?:[NSEW]\.?\s+)?(?:[A-Z0-9][A-Z0-9.'’-]*\s+){0,6}(?:Street|St\.?|Road|Rd\.?|Avenue|Ave\.?|Boulevard|Blvd\.?|Drive|Dr\.?|Lane|Ln\.?|Court|Ct\.?|Crescent|Cres\.?|Way|Trail|Terrace|Place|Pl\.?|Highway|Hwy\.?|Circle|Parkway|Pkwy\.?)\b(?:\s*(?:,|#|Unit|Suite|Apt\.?)\s*[A-Z0-9-]+)?/gi },
+        { category: categories[7], pattern: /\b(?:SIN|social insurance)\s*(?:number|no\.?|#)?\s*[:#-]?\s*\d{3}[ -]?\d{3}[ -]?\d{3}\b|\b(?:SSN|social security)\s*(?:number|no\.?|#)?\s*[:#-]?\s*\d{3}[ -]?\d{2}[ -]?\d{4}\b|\b(?:passport|driver'?s? licen[cs]e|government ID|tax ID)\s*(?:number|no\.?|#)?\s*[:#-]?\s*[A-Z0-9-]{5,20}\b/gi },
+        { category: categories[6], pattern: /\b[A-Z]\d[A-Z][ -]?\d[A-Z]\d\b|\b\d{5}(?:-\d{4})?\b/gi },
+        { category: categories[9], pattern: /(?<![\w])(?:[$€£¥]\s?\d[\d,]*(?:\.\d{1,2})?|(?:CAD|USD|EUR|GBP)\s?\d[\d,]*(?:\.\d{1,2})?|\d[\d,]*(?:\.\d{1,2})?\s?(?:CAD|USD|EUR|GBP))(?!\w)/gi }
+      ];
+
+      const setStatus = (message) => { status.textContent = message; };
+      const countLabel = (value) => `${value.length.toLocaleString()} character${value.length === 1 ? "" : "s"}`;
+
+      function updateCounts() {
+        sourceCount.textContent = countLabel(sourceText.value);
+        resultCount.textContent = countLabel(resultText.value);
+      }
+
+      function resetOutput(message = "Ready. Nothing leaves this page.") {
+        resultText.value = "";
+        findingsList.innerHTML = '<li class="empty-state">No scan yet. Add text, then choose “Redact sensitive details.”</li>';
+        copyButton.disabled = true;
+        downloadButton.disabled = true;
+        setStatus(message);
+        updateCounts();
+      }
+
+      function addFinding(findings, category, lineNumber) {
+        let finding = findings.get(category.key);
+        if (!finding) {
+          finding = { category, count: 0, lines: new Set() };
+          findings.set(category.key, finding);
+        }
+        finding.count += 1;
+        finding.lines.add(lineNumber);
+      }
+
+      function redact() {
+        const input = sourceText.value;
+        if (!input.trim()) {
+          resetOutput("Add some text before running the redactor.");
+          sourceText.focus();
+          return;
+        }
+
+        const findings = new Map();
+        const output = input.split("\n").map((originalLine, index) => {
+          const lineNumber = index + 1;
+          for (const rule of lineRules) {
+            if (rule.pattern.test(originalLine)) {
+              addFinding(findings, rule.category, lineNumber);
+              return rule.category.placeholder;
+            }
+          }
+
+          let line = originalLine;
+          for (const rule of inlineRules) {
+            rule.pattern.lastIndex = 0;
+            line = line.replace(rule.pattern, () => {
+              addFinding(findings, rule.category, lineNumber);
+              return rule.category.placeholder;
+            });
+          }
+          return line;
+        }).join("\n");
+
+        resultText.value = output;
+        renderFindings(findings);
+        const total = Array.from(findings.values()).reduce((sum, item) => sum + item.count, 0);
+        copyButton.disabled = false;
+        downloadButton.disabled = false;
+        updateCounts();
+        setStatus(total
+          ? `Redaction complete: ${total} potential sensitive ${total === 1 ? "item" : "items"} replaced. Review the result carefully.`
+          : "Scan complete: no recognized patterns found. Manual review is still required.");
+      }
+
+      function renderFindings(findings) {
+        findingsList.replaceChildren();
+        if (findings.size === 0) {
+          const item = document.createElement("li");
+          item.className = "empty-state";
+          item.textContent = "No recognized patterns found. This does not mean the text is safe to share.";
+          findingsList.append(item);
+          return;
+        }
+
+        for (const category of categories) {
+          const finding = findings.get(category.key);
+          if (!finding) continue;
+          const lines = Array.from(finding.lines).sort((a, b) => a - b);
+          const item = document.createElement("li");
+          item.className = "finding";
+          const dot = document.createElement("span");
+          dot.className = "finding-dot";
+          dot.setAttribute("aria-hidden", "true");
+          const description = document.createElement("span");
+          const title = document.createElement("strong");
+          title.textContent = category.label;
+          const detail = document.createElement("small");
+          detail.textContent = `${category.detail} · ${lines.length === 1 ? "line" : "lines"} ${lines.join(", ")}`;
+          description.append(title, detail);
+          const count = document.createElement("span");
+          count.className = "finding-count";
+          count.textContent = `×${finding.count}`;
+          count.setAttribute("aria-label", `${finding.count} replacements`);
+          item.append(dot, description, count);
+          findingsList.append(item);
+        }
+      }
+
+      async function copyResult() {
+        if (!resultText.value) return;
+        try {
+          await navigator.clipboard.writeText(resultText.value);
+        } catch (_) {
+          resultText.focus();
+          resultText.select();
+          const copied = document.execCommand("copy");
+          resultText.setSelectionRange(0, 0);
+          if (!copied) {
+            setStatus("Copy was blocked by the browser. Select the result and copy it manually.");
+            return;
+          }
+        }
+        setStatus("Redacted result copied. Clipboard contents may be visible to other applications.");
+      }
+
+      function downloadResult() {
+        if (!resultText.value) return;
+        const blob = new Blob([resultText.value], { type: "text/plain;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "ai-safe-redacted.txt";
+        document.body.append(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+        setStatus("Redacted result downloaded as a local TXT file.");
+      }
+
+      sourceText.addEventListener("input", () => {
+        updateCounts();
+        if (resultText.value) setStatus("Original text changed. Run the redactor again to refresh the result.");
+      });
+      sampleButton.addEventListener("click", () => {
+        sourceText.value = sample;
+        resetOutput("Fictional sample loaded. Choose “Redact sensitive details” to scan it.");
+        sourceText.focus();
+      });
+      redactButton.addEventListener("click", redact);
+      copyButton.addEventListener("click", copyResult);
+      downloadButton.addEventListener("click", downloadResult);
+      clearButton.addEventListener("click", () => {
+        sourceText.value = "";
+        resetOutput("Cleared. No text has been retained by this page.");
+        sourceText.focus();
+      });
+
+      sourceText.addEventListener("keydown", (event) => {
+        if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+          event.preventDefault();
+          redact();
+        }
+      });
+
+      updateCounts();
+    })();
+  </script>
+</body>
+</html>

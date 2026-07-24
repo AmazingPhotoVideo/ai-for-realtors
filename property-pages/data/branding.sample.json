@@ -1,0 +1,21 @@
+{
+  "siteName": "North & Cedar Properties",
+  "locale": "en-CA",
+  "colors": {
+    "primary": "#24493E",
+    "accent": "#E7B96B",
+    "surface": "#F7F2E8"
+  },
+  "form": {
+    "enabled": true,
+    "endpoint": "",
+    "fallbackEmail": "maya.chen@example.com",
+    "consentText": "I agree to be contacted by North & Cedar Realty about this property and my request. Message and data rates may apply; consent is not a condition of purchase.",
+    "successMessage": "Thank you — Maya will follow up shortly."
+  },
+  "analytics": {
+    "enabled": false,
+    "provider": "plausible",
+    "siteId": "property.example.com"
+  }
+}

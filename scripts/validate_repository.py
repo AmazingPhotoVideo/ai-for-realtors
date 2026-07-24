@@ -9,7 +9,7 @@ from pathlib import Path
 from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
-SKIP_PARTS = {".git", "node_modules", ".next", "dist", "out", "output", "outputs"}
+SKIP_PARTS = {".git", ".hermes", "build", "node_modules", ".next", "dist", "out", "output", "outputs"}
 MARKDOWN_LINK = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
 SECRET_PATTERNS = {
     "GitHub token": re.compile(r"\b(?:github_pat_[A-Za-z0-9_]{20,}|gh[oprsu]_[A-Za-z0-9]{30,})\b"),
@@ -89,11 +89,55 @@ def check_creative_platform(errors: list[str]) -> None:
             errors.append(f"disallowed nofollow/sponsored relationship found in public templates under {directory}")
 
 
+def check_community_tools(errors: list[str]) -> None:
+    required = (
+        "gallery.md",
+        "tools/README.md",
+        "tools/ai-safe-redactor/index.html",
+        "tools/ai-safe-redactor/README.md",
+        "tools/open-house-qr/index.html",
+        "skills/README.md",
+        "tutorials/README.md",
+        "starter-paths/README.md",
+    )
+    for relative in required:
+        if not (ROOT / relative).exists():
+            errors.append(f"missing community-tool path: {relative}")
+
+    preview_names = (
+        "editorial-luxury.png",
+        "bold-modern.png",
+        "warm-neighbourhood.png",
+        "property-cinematic.png",
+        "property-editorial.png",
+        "property-neighbourhood.png",
+        "agent-luxury-editorial.png",
+        "agent-neighbourhood-journal.png",
+        "agent-modern-team.png",
+    )
+    for name in preview_names:
+        relative = Path("docs/assets/previews") / name
+        path = ROOT / relative
+        if not path.is_file() or path.stat().st_size == 0:
+            errors.append(f"missing or empty creative preview: {relative}")
+
+    for relative in ("tools/ai-safe-redactor/index.html", "tools/open-house-qr/index.html"):
+        path = ROOT / relative
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        if "amazingphotovideo.com" not in text:
+            errors.append(f"no APV backlink found in public tool: {relative}")
+        if re.search(r'rel\s*=\s*["\'][^"\']*\b(?:nofollow|sponsored)\b', text, re.IGNORECASE):
+            errors.append(f"disallowed nofollow/sponsored relationship found in public tool: {relative}")
+
+
 def main() -> int:
     errors: list[str] = []
     check_markdown_links(errors)
     check_secrets_and_reference_branding(errors)
     check_creative_platform(errors)
+    check_community_tools(errors)
     if errors:
         print(f"FAIL: {len(errors)} repository validation issue(s)")
         for error in errors:

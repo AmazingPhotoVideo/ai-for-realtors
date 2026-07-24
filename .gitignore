@@ -2,6 +2,7 @@
 .DS_Store
 
 # Generated creative exports
+/build/
 **/output/
 **/outputs/
 **/dist/
@@ -11,6 +12,7 @@ node_modules/
 .next/
 
 # Local environment and secrets
+/.hermes/
 .env
 .env.*
 !.env.example

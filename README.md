@@ -2,11 +2,11 @@
 
 # AI for Realtors
 
-### AI prompts, Claude Skills, and practical tutorials for real estate agents who want more listings, more buyers, and more closed deals.
+### Practical AI prompts, skills, tutorials, blueprints, and starter tools for real estate agents.
 
 <br />
 
-**Maintained by [Amazing Photo Video (APV)](https://amazingphotovideo.com)** — Toronto's luxury real estate media company, trusted by Sotheby's International Realty, Engel & Völkers, and Barry Cohen Homes (Cohen Homes & Estates). We've helped market over **$5 billion** in luxury property.
+**Maintained by [Amazing Photo Video (APV)](https://amazingphotovideo.com)** — Toronto's luxury real estate media company, trusted by Sotheby's International Realty, Engel & Völkers, and Barry Cohen Homes (Cohen Homes & Estates). We've helped market **$5B+** in luxury property.
 
 <br />
 
@@ -29,7 +29,9 @@
 
 Built by working agents and the team behind APV — not theory, not vibes. Everything should be practical enough to use on a real listing or in a real real-estate business.
 
-> **Why publish it?** Because the agents winning in 2026 are executing the basics 10x faster with AI. The prompt library remains easy to learn from and contribute to; reusable design/site assets carry separate attribution and commercial-use terms so APV can keep investing in them.
+> **Packaging note:** Prompts, tutorials, and other public learning resources can be browsed and reused as described in their files. Covered design, page, site, and other creative assets follow APV's separate [pilot policy](./docs/design-asset-licensing.md), including attribution and commercial-use limits. The repository as a whole is not presented as open source or entirely free.
+
+Prefer a guided route? [Open the live no-code resource hub](https://amazingphotovideo.github.io/ai-for-realtors/), browse the [fictional creative gallery](./gallery.md), or follow one of the [five starter paths](./starter-paths/README.md).
 
 ---
 
@@ -138,8 +140,8 @@ Every listing is a free billboard, lead magnet, and content engine. Most agents 
 | Asset | What it does | Path |
 |---|---|---|
 | **Smart Sign Rider QR Funnel** | QR → mobile listing page → SMS auto-responder → CRM. Full build guide. | [`/tutorials/qr-sign-rider-funnel.md`](./tutorials/qr-sign-rider-funnel.md) |
-| **Drive-By Lead Capture Page** | Mobile-first landing page template (HTML) optimized for sub-3-second load | [`/tools/drive-by-landing/`](./tools/drive-by-landing) |
-| **Open House QR Sign-In** | No-app-required check-in flow that pushes leads straight into your CRM | [`/tools/open-house-qr/`](./tools/open-house-qr) |
+| **Drive-By Lead Capture Blueprint** | Mobile-first page specification, copy, consent, routing, and implementation checklist; no HTML template is included | [`/tools/drive-by-landing/`](./tools/drive-by-landing) |
+| **Open House QR Sign-In** | Ready local browser generator for a check-in link and printable table tent. Connect a brokerage-approved form/CRM before production use. | [`/tools/open-house-qr/`](./tools/open-house-qr) |
 
 ### Lead magnets
 
@@ -153,7 +155,7 @@ Every listing is a free billboard, lead magnet, and content engine. Most agents 
 
 | Asset | What it does | Path |
 |---|---|---|
-| **Single-Property Funnel** | One-listing landing page + capture + nurture (GoHighLevel + Vercel templates included) | [`/funnels/single-property/`](./funnels/single-property) |
+| **Single-Property Funnel Blueprint** | Page, capture, routing, nurture, retargeting, and measurement plan; Vercel and GoHighLevel templates are not included | [`/funnels/single-property/`](./funnels/single-property) |
 | **Pre-Market Waitlist Funnel** | Build a waitlist *before* the listing hits MLS — generates buyer + seller leads | [`/funnels/pre-market-waitlist/`](./funnels/pre-market-waitlist) |
 | **Home Valuation Funnel** | Seller magnet funnel with automated CMA follow-up | [`/funnels/home-valuation/`](./funnels/home-valuation) |
 
@@ -253,13 +255,7 @@ Claude Skills are folders Claude reads automatically when it detects a matching 
 2. **In Claude Code or the API:** Place the skill folder in your skills directory — Claude reads `SKILL.md` and follows it.
 3. **In ChatGPT / Gemini:** Open the skill's `SKILL.md` file and paste the contents as a system prompt or custom instruction.
 
-Each skill folder contains:
-```
-skill-name/
-├── SKILL.md          # The instructions Claude reads
-├── examples/         # Real input/output examples
-└── templates/        # Reusable assets (HTML, JSON, etc.)
-```
+Each skill folder is organized around a `SKILL.md` instruction file. A skill may embed examples, checklists, or reusable blocks directly in that file; do not assume separate `examples/` or `templates/` folders exist. Browse the [skills index](./skills/README.md) to choose one.
 
 Full guide: [`/tutorials/using-claude-skills.md`](./tutorials/using-claude-skills.md)
 
@@ -298,7 +294,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
 - 🏆 Trusted by Sotheby's International Realty, Engel & Völkers, Barry Cohen Homes, and 200+ top agents
 - 📍 Toronto, Ontario, Canada
-- 💼 Founded by Cole Neophytou — 14+ years in luxury real estate media, $1B+ in properties photographed
+- 💼 Founded by Cole Neophytou — 14+ years in luxury real estate media, **$5B+** in properties marketed
 - 🌐 [amazingphotovideo.com](https://amazingphotovideo.com)
 
 This repo is part of our mission to help agents win with technology — not be replaced by it.

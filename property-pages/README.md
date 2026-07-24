@@ -4,6 +4,8 @@
 
 Three dependency-light, responsive single-listing websites generated from the same validated listing and branding JSON:
 
+[Preview all three fictional page designs in the creative toolkit gallery.](../gallery.md)
+
 - **Cinematic** — full-bleed imagery, dark gallery experience, dramatic typography.
 - **Editorial** — a warm, magazine-like brochure with a structured photo essay.
 - **Neighbourhood** — bright, story-led chapters that connect the home to its setting.

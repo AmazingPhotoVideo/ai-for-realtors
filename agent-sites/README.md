@@ -2,6 +2,8 @@
 
 A configuration-driven Next.js starter for individual Realtors and teams. It includes three intentionally different design presets, fictional manual listing data, accessible inquiry UI, and a concrete optional Convex + Clerk CRM starter. It does **not** deploy, provision paid services, or connect to MLS systems.
 
+[Preview all three fictional site presets in the creative toolkit gallery.](../gallery.md)
+
 ## Preview locally
 
 Requires Node.js 20+. This starter is verified on Node.js 20.3.0; the pinned framework and provider packages support that runtime.

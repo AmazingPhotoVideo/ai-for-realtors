@@ -2,6 +2,8 @@
 
 **Policy version:** 0.2 — pilot terms
 
+**Effective date:** When this version is published on the default branch of the canonical APV repository, unless APV states a different effective date.
+
 **Copyright:** © Amazing Photo Video. All rights reserved except for the limited, conditional permission described below.
 
 This page explains the current intended business terms for the website templates, property-page templates, design packs, export tools, and their matching builder skills in this repository. It is not an open-source licence and does not dedicate any APV rights to the public domain.
@@ -17,6 +19,12 @@ To the fullest extent permitted by applicable law, APV may change, replace, susp
 Downloading or using one version does not grant rights to future versions, updates, new designs, APV trademarks, private repositories, services, integrations, or support. APV may also offer different terms to different users or decline a custom, attribution-free, reseller, or white-label licence.
 
 A signed custom agreement controls if it conflicts with this page. Rights that applicable law makes non-revocable cannot be clawed back merely by editing a repository file; this is why APV should avoid promising perpetual or irrevocable permissions and should obtain counsel-reviewed agreements for material commercial relationships.
+
+## Current policy and historical records
+
+For repository-distributed covered assets, APV's current repository policy is the effective version published at `docs/design-asset-licensing.md` on the default branch of the canonical [AmazingPhotoVideo/ai-for-realtors](https://github.com/AmazingPhotoVideo/ai-for-realtors) repository. A feature branch, pull request, earlier commit, cached view, diff, mirror, or superseded draft does not by itself state APV's current policy or grant, amend, extend, or revive a permission.
+
+Policy changes remain prospective as described above. This section does not override a signed written agreement or erase a right that applicable law has already made non-revocable.
 
 ## Assets covered
 

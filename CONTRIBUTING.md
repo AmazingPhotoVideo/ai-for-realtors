@@ -1,6 +1,6 @@
 # Contributing to AI for Realtors
 
-Thanks for helping improve this open-source playbook for real estate agents.
+Thanks for helping improve this public playbook for real estate agents.
 
 ## What we accept
 

@@ -1,7 +1,13 @@
 title: AI for Realtors
-description: Free AI prompts, Claude Skills, tutorials, funnels, and tools for real estate agents.
+description: Free AI prompts, Claude Skills, lead-generation workflows, CRM playbooks, funnels, and tutorials for real estate agents.
 url: https://amazingphotovideo.github.io
 baseurl: /ai-for-realtors
+lang: en-CA
+author:
+  name: Amazing Photo Video
+  url: https://amazingphotovideo.com
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap

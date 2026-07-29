@@ -19,7 +19,7 @@
 
 ## What is this?
 
-**AI for Realtors** is a free, open-source collection of:
+**AI for Realtors** is a free, public collection of:
 
 - 🧠 **AI prompts** — battle-tested prompts for ChatGPT, Claude, Gemini, and Perplexity, written specifically for real estate workflows
 - 🛠️ **Claude Skills** — reusable skill modules that turn Claude into a specialist agent for listing presentations, lead nurture, market reports, and more
